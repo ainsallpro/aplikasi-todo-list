@@ -1,4 +1,3 @@
-// Menunggu hingga seluruh konten halaman HTML dimuat sebelum menjalankan skrip
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- SELEKSI ELEMEN DOM ---
@@ -370,4 +369,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Jalankan Aplikasi
     initializeApp();
+
 });
