@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <h1>My Tasks</h1>
+                <p>Selamat datang, kerjakan tugasmu!</p>
+            </div>
+            <div class="header-right">
+                <div id="current-time" class="current-time"></div>
+                <div id="current-date" class="current-date"></div>
+            </div>
+        </header>
+
+        <section class="controls">
+            <div class="control-group search-group">
+                <input type="text" id="search-input" placeholder="Cari tugas...">
+            </div>
+            <div class="control-group filter-group">
+                <select id="filter-status">
+                    <option value="all">Semua Status</option>
+                    <option value="active">Aktif</option>
+                    <option value="completed">Selesai</option>
+                </select>
+                <select id="filter-priority">
+                    <option value="all">Semua Prioritas</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="control-group sort-group">
+                <select id="sort-by">
+                    <option value="date-asc">Tanggal Terdekat</option>
+                    <option value="date-desc">Tanggal Terjauh</option>
+                    <option value="title-asc">A–Z</option>
+                    <option value="title-desc">Z–A</option>
+                    <option value="priority">Prioritas</option>
+                </select>
+            </div>
+            <div class="control-group action-group">
+                <button id="delete-completed-btn" class="button-secondary">Hapus Selesai</button>
+                <button id="add-task-btn" class="button-primary">+ Tambah Tugas</button>
+            </div>
+        </section>
+
+        <main class="task-list-container">
+            <ul id="task-list">
+                </ul>
+            <div id="empty-state" class="empty-state hidden">
+                <div class="empty-state-content">
+                    <h3>Tidak ada tugas di sini!</h3>
+                    <p>Mulai tambahkan tugas pertamamu.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>Tugas Aktif: <span id="active-tasks-count">0</span></p>
+            <p>Tugas Selesai: <span id="completed-tasks-count">0</span></p>
+        </footer>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay hidden"></div>
+    <div id="task-modal" class="task-modal hidden" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <div class="modal-header">
+            <h2 id="modal-title">Tambah Tugas Baru</h2>
+            <button id="close-modal-btn" class="close-modal-btn" aria-label="Tutup">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="task-form" data-form-mode="add" data-task-id="">
+                <div class="form-group">
+                    <label for="task-title">Judul Tugas</label>
+                    <input type="text" id="task-title" required minlength="1" placeholder="cth: Belajar JavaScript DOM">
+                    <small class="error-message" id="title-error"></small>
+                </div>
+                <div class="form-group">
+                    <label for="task-desc">Deskripsi (Opsional)</label>
+                    <textarea id="task-desc" rows="3" placeholder="cth: Latihan manipulasi elemen dan event listener"></textarea>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="task-due-date">Tanggal Jatuh Tempo</label>
+                        <input type="date" id="task-due-date">
+                        <small class="error-message" id="date-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-priority">Prioritas</label>
+                        <select id="task-priority">
+                            <option value="Low">Rendah</option>
+                            <option value="Medium" selected>Sedang</option>
+                            <option value="High">Tinggi</option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="task-category">Kategori</label>
+                    <select id="task-category">
+                        <option value="Work">Pekerjaan</option>
+                        <option value="Personal">Pribadi</option>
+                        <option value="Study">Belajar</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancel-btn" class="button-secondary">Batal</button>
+                    <button type="submit" id="save-task-btn" class="button-primary">Simpan Tugas</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast">
+        <p id="toast-message">Notifikasi!</p>
+        <button id="undo-btn" class="undo-btn hidden">Undo</button>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
